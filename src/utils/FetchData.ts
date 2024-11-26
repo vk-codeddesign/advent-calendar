@@ -1,13 +1,14 @@
 import { getStoryblokApi } from '@/lib/storyblok';
-import { ISbStoriesParams } from '@storyblok/react';
+import { type ISbStoriesParams, type StoryblokClient } from '@storyblok/react';
 
 export async function fetchData() {
   const sbParams: ISbStoriesParams = { version: 'draft' };
 
-  const storyblokApi = getStoryblokApi();
+  const storyblokApi: StoryblokClient = getStoryblokApi();
+
   if (!storyblokApi) {
     throw new Error('Storyblok API is not initialized.');
   }
 
-  return storyblokApi.get(`cdn/stories/home`, sbParams, { cache: 'no-store' });
+  return storyblokApi.get(`cdn/stories/home`, sbParams);
 }
