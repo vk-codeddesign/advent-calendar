@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import StoryblokProvider from "@/components/StoryblokProvider";
+import StoryblokProvider from "@/utils/StoryblokProvider";
+import { storyblokInit, apiPlugin } from "@storyblok/react";
+
+storyblokInit({
+  accessToken: process.env.storyblokApiToken,
+  use: [apiPlugin],
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
