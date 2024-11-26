@@ -1,4 +1,5 @@
-import { getStoryblokApi, ISbStoriesParams } from '@storyblok/react/rsc';
+import { getStoryblokApi } from '@/lib/storyblok';
+import { ISbStoriesParams } from '@storyblok/react';
 
 export async function fetchData() {
   const sbParams: ISbStoriesParams = { version: 'draft' };

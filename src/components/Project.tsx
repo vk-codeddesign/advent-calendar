@@ -1,5 +1,5 @@
 import { DeployedProjectProps } from "@/types/blok";
-import { storyblokEditable } from "@storyblok/react";
+import { storyblokEditable } from "@storyblok/react/rsc";
 
 export default function DeployedProject({ blok }: DeployedProjectProps) {
   return (

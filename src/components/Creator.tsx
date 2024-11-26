@@ -1,5 +1,5 @@
 import { CreatorProps } from "@/types/blok";
-import { storyblokEditable } from "@storyblok/react";
+import { storyblokEditable } from "@storyblok/react/rsc";
 
 
 
