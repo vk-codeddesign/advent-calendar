@@ -13,7 +13,7 @@ export default async function Home() {
         <h1>Story: {data.story.name}</h1>
         {/* <StoryblokStory story={data.story} /> */}
         <StoryblokStory story={data.story} bridgeOptions={bridgeOptions} />
-        <pre>{JSON.stringify(data.story.content, null, 2)}</pre>
+        {/* <pre>{JSON.stringify(data.story.content, null, 2)}</pre> */}
       </div>
     </main>
   );
