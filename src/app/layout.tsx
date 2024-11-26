@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import StoryblokProvider from "@/utils/StoryblokProvider";
-import { storyblokInit, apiPlugin } from "@storyblok/react";
+
+
+import { storyblokInit, apiPlugin } from '@storyblok/react/rsc';
 
 storyblokInit({
-  accessToken: process.env.storyblokApiToken,
+  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_API_TOKEN,
   use: [apiPlugin],
 });
 
