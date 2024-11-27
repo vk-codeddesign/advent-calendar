@@ -1,0 +1,37 @@
+.grid {
+  display: grid;
+  grid-template-areas:
+    'c c r'
+    'v j j'
+    'x x x'
+    'x x x'
+    'w a a'
+    'h a a'
+    'b g g'
+    'n m m'
+    'l i i'
+    's s d'
+    'o t t'
+    'k t t'
+    'k f p'
+    'u u p'
+    'q q e'
+    'q q e';
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  aspect-ratio: 3/16;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-areas:
+      'x x x w m m l i i q q'
+      'x x x h m m s s d q q'
+      'x x x b g g o t t t e'
+      'c c r n a a k t t t p'
+      'v j j n a a k f u u p';
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    aspect-ratio: 11/5;
+  }
+}

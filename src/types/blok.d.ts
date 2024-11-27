@@ -32,6 +32,10 @@ export interface FrameBlok extends SbBlokData {
   deployed_project: DeployedProjectBlok[];
   component: string;
   _editable?: string;
+  mobile_ar_width: number;
+  mobile_ar_height: number;
+  desktop_ar_width: number;
+  desktop_ar_height: number;
 }
 
 export interface CreatorBlok extends SbBlokData {
