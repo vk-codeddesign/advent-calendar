@@ -2,7 +2,6 @@
 import { FrameProps } from "@/types/blok";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import { motion } from "motion/react";
-import Link from "next/link";
 
 interface FrameComponentProps extends FrameProps {
   letter: string;
