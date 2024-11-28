@@ -56,7 +56,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
       onLayoutAnimationStart={handleLayoutAnimationStart}
       onLayoutAnimationComplete={handleLayoutAnimationComplete}
     >
-      <motion.div layout className="flex justify-center items-center w-full h-full">
+      <motion.div layout className="flex justify-center items-center w-full h-full p-8">
         <AnimatePresence>
           {!isSelected && !animationComplete && (
             <motion.h2
@@ -92,14 +92,14 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
                 layoutId={`content-${blok._uid}`}
                 className="h-full flex flex-col justify-center items-center"
               >
-                <div className="mb-8 text-2xl">{blok.name.slice(0, -5) + "."}</div>
-                <div className="max-w-screen-xl w-full flex flex-row">
+                <div className="mb-2 md:mb-8 text-2xl">{blok.name.slice(0, -5) + "."}</div>
+                <div className="max-w-screen-xl w-full flex flex-col md:flex-row">
                   <div className="m-auto w-full flex justify-center items-center">
                     {blok.deployed_project.map((projectBlok: DeployedProjectBlok) => (
                       <StoryblokServerComponent blok={projectBlok} key={projectBlok._uid} />
                     ))}
                   </div>
-                  <span className="border-l-[1px] border-black" />
+                  <span className="border-t-[1px] mt-6 md:mt-0 md:border-l-[1px] border-black" />
                   <div className="w-full flex items-center justify-center">
                     {blok.about.map((aboutBlok: AboutBlok) => (
                       <StoryblokServerComponent blok={aboutBlok} key={aboutBlok._uid} />
