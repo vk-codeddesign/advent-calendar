@@ -1,6 +1,5 @@
 import StoryblokProvider from "@/utils/StoryblokProvider";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { SelectedFrameProvider } from "@/contexts/SelectedFrameContext";
 import { Space_Grotesk } from 'next/font/google';
