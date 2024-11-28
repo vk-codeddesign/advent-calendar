@@ -1,4 +1,5 @@
 "use client";
+import usePreventZoom from "@/utils/preventZoom";
 import { createContext, useContext, useState, useEffect } from "react";
 
 interface SelectedFrameContextValue {
@@ -10,6 +11,8 @@ const SelectedFrameContext = createContext<SelectedFrameContextValue | undefined
 
 export const SelectedFrameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedUid, setSelectedUid] = useState<string | null>(null);
+
+  usePreventZoom(selectedUid !== null);
 
   useEffect(() => {
     if (selectedUid) {

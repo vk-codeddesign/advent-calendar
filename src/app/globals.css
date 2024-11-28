@@ -25,6 +25,9 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .overscroll-none {
+    overscroll-behavior: none;
+  }
 }
 
 a {
