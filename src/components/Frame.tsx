@@ -90,9 +90,9 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
               <motion.div
                 layout
                 layoutId={`content-${blok._uid}`}
-                className="h-full flex flex-col justify-center items-center"
+                className="h-full flex flex-col justify-start md:justify-center items-center"
               >
-                <div className="mb-2 md:mb-8 text-2xl">{blok.name.slice(0, -5) + "."}</div>
+                <div className="mt-2 mb-8 text-2xl">{blok.name.slice(0, -5) + "."}</div>
                 <div className="max-w-screen-xl w-full flex flex-col md:flex-row">
                   <div className="m-auto w-full flex justify-center items-center">
                     {blok.deployed_project.map((projectBlok: DeployedProjectBlok) => (
