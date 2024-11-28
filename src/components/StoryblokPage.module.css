@@ -20,6 +20,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(16, 1fr);
   aspect-ratio: 3/16;
+  /* gap: clamp(2px, 4vw, 24px); */
 }
 
 @media (min-width: 768px) {
@@ -33,5 +34,6 @@
     grid-template-columns: repeat(11, 1fr);
     grid-template-rows: repeat(5, 1fr);
     aspect-ratio: 11/5;
+    /* gap: clamp(8px, 2vw, 16px); */
   }
 }

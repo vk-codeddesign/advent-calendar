@@ -8,8 +8,8 @@ export interface FrameProps {
   blok: FrameBlok;
 }
 
-export interface CreatorProps {
-  blok: CreatorBlok;
+export interface AboutProps {
+  blok: AboutBlok;
 }
 
 export interface DeployedProjectProps {
@@ -28,7 +28,7 @@ export interface PageBlok extends SbBlokData {
 export interface FrameBlok extends SbBlokData {
   _uid: string;
   name: string;
-  creator: CreatorBlok[];
+  about: AboutBlok[];
   deployed_project: DeployedProjectBlok[];
   component: string;
   _editable?: string;
@@ -38,12 +38,14 @@ export interface FrameBlok extends SbBlokData {
   desktop_ar_height: number;
 }
 
-export interface CreatorBlok extends SbBlokData {
+export interface AboutBlok extends SbBlokData {
   _uid: string;
-  full_name: string;
-  portfolio_link: MultiLinkBlok;
-  linkedin_handle: string;
-  instagram_handle: string;
+  project_title: string;
+  project_description: string;
+  creator_full_name: string;
+  creator_portfolio_link: MultiLinkBlok;
+  creator_linkedin_handle: MultiLinkBlok;
+  creator_instagram_handle: string;
   component: string;
   _editable?: string;
 }

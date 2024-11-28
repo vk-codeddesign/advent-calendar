@@ -1,6 +1,6 @@
 import { apiPlugin, storyblokInit } from '@storyblok/react/rsc';
 import Frame from '@/components/Frame';
-import Creator from '@/components/Creator';
+import About from '@/components/About';
 import DeployedProject from '@/components/Project';
 import StoryblokPage from '@/components/StoryblokPage';
 
@@ -10,7 +10,7 @@ export const getStoryblokApi = storyblokInit({
   components: {
     page: StoryblokPage,
     frame: Frame,
-    creator: Creator,
+    about: About,
     deployed_project: DeployedProject,
   },
 });

@@ -2,16 +2,12 @@ import StoryblokProvider from "@/utils/StoryblokProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { SelectedFrameProvider } from "@/contexts/SelectedFrameContext";
+import { Space_Grotesk } from 'next/font/google';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const typeface = Space_Grotesk({
+  variable: "--font-sans",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -27,8 +23,10 @@ export default function RootLayout({
   return (
     <StoryblokProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          {children}
+        <body className={`${typeface.variable} antialiased`}>
+          <SelectedFrameProvider>
+            {children}
+          </SelectedFrameProvider>
         </body>
       </html>
     </StoryblokProvider>

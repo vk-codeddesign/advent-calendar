@@ -2,7 +2,10 @@ import { getStoryblokApi } from '@/lib/storyblok';
 import { type ISbStoriesParams, type StoryblokClient } from '@storyblok/react';
 
 export async function fetchData() {
-  const sbParams: ISbStoriesParams = { version: 'draft' };
+  const sbParams: ISbStoriesParams = {
+    version: 'draft',
+    cv: Date.now(),
+  };
 
   const storyblokApi: StoryblokClient = getStoryblokApi();
 
