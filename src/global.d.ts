@@ -6,5 +6,5 @@ declare global {
     requestPermission: () => Promise<'granted' | 'denied'>;
   }
 
-  var DeviceMotionEvent: DeviceMotionEventConstructor;
+  let DeviceMotionEvent: DeviceMotionEventConstructor;
 }

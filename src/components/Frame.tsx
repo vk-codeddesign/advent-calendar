@@ -14,30 +14,6 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const isSelected = blok._uid === selectedUid;
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const frameVariants = {
-    initial: {
-      width: "100%",
-      height: "100%",
-      borderRadius: "0.5rem",
-      position: "relative",
-      zIndex: 0,
-    },
-    expanded: {
-      width: "100vw",
-      height: "100vh",
-      borderRadius: "0rem",
-      position: "fixed",
-      top: 0,
-      left: 0,
-      zIndex: 50,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-        when: "afterChildren", // Wait until children have animated out
-      },
-    },
-  };
-
   const previewVariants = {
     visible: {
       opacity: 1,
@@ -63,7 +39,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
 
   // Get current day of december
   const today = new Date();
-  const currentMonth = today.getMonth(); // Months are zero-indexed
+  // const currentMonth = today.getMonth();
   // const currentDay = currentMonth == 11 ? today.getDate() : 0;
   const currentDay = 11 == 11 ? 17 : 0;
 
