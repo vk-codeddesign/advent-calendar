@@ -13,6 +13,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const { selectedUid, setSelectedUid } = useSelectedFrame();
   const isSelected = blok._uid === selectedUid;
   const [isAnimating, setIsAnimating] = useState(false);
+  const [startLayoutAnimation, setStartLayoutAnimation] = useState(false);
 
   // Extract day number from blok.name
   const frameDay = blok.dayNumber;
@@ -27,12 +28,16 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const isAccessible = frameDay <= currentDay;
 
   const handleClick = () => {
-    if (isAccessible) setSelectedUid(blok._uid);
+    if (isAccessible && !isSelected) {
+      setSelectedUid(blok._uid);
+    }
   }
 
   const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setSelectedUid(null);
+    if (isSelected) {
+      setSelectedUid(null);
+    }
   }
 
   const frameVariants = {
@@ -90,6 +95,9 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
         top: isSelected ? 0 : undefined,
         left: isSelected ? 0 : undefined,
         zIndex: isSelected ? 50 : 0,
+        width: isSelected ? "100vw" : "100%",
+        height: isSelected ? "100vh" : "100%",
+        borderRadius: isSelected ? "0rem" : "0.5rem",
       }}
       transition={{
         layout: { duration: 0.5, ease: "easeInOut" },
@@ -100,20 +108,20 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
       onClick={isAccessible && !isSelected ? handleClick : undefined}
     >
       <motion.div
-        // layout 
+        layout
         className="flex justify-center items-center w-full h-full p-8">
         <AnimatePresence mode="wait">
           {!isSelected && (
             // Render preview content
             <motion.h2
               key={`preview-${blok._uid}-${isSelected}`}
-              variants={previewVariants}
-              initial="visible"
-              animate="visible"
-              exit="hidden"
+              layout
               layoutId={`title-${blok._uid}`}
+              variants={previewVariants}
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               className={`text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
-
             >
               {blok.name.slice(0, -10)}
             </motion.h2>
@@ -122,10 +130,12 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
           {isSelected && (
             <motion.div
               key={`expanded-${blok._uid}-${isSelected}`}
-              variants={expandedVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
+              layout
+              layoutId={`content-${blok._uid}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
               className="w-full h-full"
             >
               <button
