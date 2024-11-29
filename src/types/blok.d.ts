@@ -28,6 +28,7 @@ export interface PageBlok extends SbBlokData {
 export interface FrameBlok extends SbBlokData {
   _uid: string;
   name: string;
+  dayNumber: number;
   about: AboutBlok[];
   deployed_project: DeployedProjectBlok[];
   component: string;

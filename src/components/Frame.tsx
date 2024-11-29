@@ -1,9 +1,9 @@
 "use client"
 import { AboutBlok, DeployedProjectBlok, FrameProps } from "@/types/blok";
 import { storyblokEditable, StoryblokServerComponent } from "@storyblok/react/rsc";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useAnimation } from "motion/react";
 import { useSelectedFrame } from "@/contexts/SelectedFrameContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface FrameComponentProps extends FrameProps {
   letter: string;
@@ -15,23 +15,60 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const [animationComplete, setAnimationComplete] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleClick = () => {
-    setSelectedUid(blok._uid);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(!isSelected);
+
+  // Animation controls
+  const contentControls = useAnimation();
+  const frameControls = useAnimation();
+
+  // Extract day number from blok.name
+  const frameDay = blok.dayNumber;
+
+  // Get current day of december
+  const today = new Date();
+  const currentMonth = today.getMonth(); // Months are zero-indexed
+  // const currentDay = currentMonth == 11 ? today.getDate() : 0;
+  const currentDay = 11 == 11 ? 10 : 0;
+
+  // Determine if the frame should be accessible
+  const isAccessible = frameDay <= currentDay;
+
+  const handleClick = async () => {
+    if (isAccessible && !isFadingOut && !isAnimating) {
+      setIsFadingOut(true);
+      await contentControls.start({ opacity: 0 });
+      setIsCollapsed(false);
+      setSelectedUid(blok._uid);
+      setIsFadingOut(false);
+    }
   }
 
-  const handleClose = (e: React.MouseEvent) => {
+  const handleClose = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    setSelectedUid(null);
-    setAnimationComplete(false);
+    if (!isFadingOut && !isAnimating) {
+      setIsFadingOut(true);
+      await contentControls.start({ opacity: 1 });
+      setIsCollapsed(false);
+      setSelectedUid(null);
+      setAnimationComplete(false);
+      setIsFadingOut(false);
+    }
   }
 
   const handleLayoutAnimationStart = () => {
     setIsAnimating(true);
   }
 
-  const handleLayoutAnimationComplete = () => {
+  const handleLayoutAnimationComplete = async () => {
     setIsAnimating(false);
     setAnimationComplete(isSelected);
+
+    // Reset content opacity for the next time the frame is opened
+    if (!isSelected) {
+      setIsCollapsed(true);
+      contentControls.set({ opacity: 1 });
+    }
   }
 
   return (
@@ -45,20 +82,25 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
         width: isSelected ? "100vw" : "100%",
         height: isSelected ? "100vh" : "100%",
         position: isSelected ? "fixed" : "relative",
+        borderRadius: isSelected ? "0rem" : "0.5rem",
         top: 0,
         left: 0,
+        cursor: isAccessible ? 'pointer' : 'not-allowed',
       }}
       transition={{
         layout: { duration: 0.5, ease: "easeInOut" },
       }}
-      className={`border-gray-400 border-2 rounded-lg overflow-hidden text-black ${isSelected ? "bg-[#E9E9E6]" : "bg-[#ffffff]"} transition-colors duration-500`}
-      onClick={isSelected ? undefined : handleClick}
+      className={`overflow-hidden text-black
+        ${isAccessible ? "bg-[#3688D3]" : "bg-[#E9E9E6]"}
+        transition-colors duration-500`}
+      onClick={isAccessible && !isSelected ? handleClick : undefined}
       onLayoutAnimationStart={handleLayoutAnimationStart}
       onLayoutAnimationComplete={handleLayoutAnimationComplete}
     >
       <motion.div layout className="flex justify-center items-center w-full h-full p-8">
-        <AnimatePresence>
-          {!isSelected && !animationComplete && (
+        <AnimatePresence >
+          {(isCollapsed) && (
+            // {(!isSelected && !animationComplete) && (
             <motion.h2
               key={`preview-${blok._uid}`}
               layoutId={`title-${blok._uid}`}
@@ -67,11 +109,12 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className={`text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
+
             >
               {blok.name.slice(0, -10)}
             </motion.h2>
           )}
-          {isSelected && animationComplete && (
+          {isSelected && animationComplete && isAccessible && (
             <motion.div
               key={`expanded-${blok._uid}`}
               initial={{ opacity: 0 }}

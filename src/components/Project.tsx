@@ -9,9 +9,7 @@ export default function DeployedProject({ blok }: DeployedProjectProps) {
           src={blok.netlify_url.url}
           className="absolute transform-gpu origin-top-left scale-30 md:scale-50 overflow-hidden"
           style={{ width: "1024px", height: "1024px", touchAction: "manipulation" }}
-          allow="autoplay"
-          sandbox="allow-scripts allow-same-origin"
-          title="Deployed Project Sketch"
+          allow="camera; microphone"
         />
       </div>
     </div>
