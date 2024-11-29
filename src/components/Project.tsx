@@ -42,10 +42,11 @@ export default function DeployedProject({ blok }: DeployedProjectProps) {
       <div className="relative w-[307px] h-[307px] md:w-[512px] md:h-[512px] overscroll-none">
         <iframe
           id={`iframe-${blok._uid}`}
-          src={blok.netlify_url.url}
+          // src={blok.netlify_url.url}
+          src="https://editor.p5js.org/amcc/sketches/kBndhSZER"
           className="absolute transform-gpu origin-top-left scale-30 md:scale-50 overflow-hidden"
           style={{ width: "1024px", height: "1024px", touchAction: "manipulation" }}
-          allow="camera; microphone; accelerometer; gyroscope; magnetometer"
+          allow="camera; microphone; accelerometer; gyroscope; magnetometer; fullscreen"
         />
       </div>
     </div>
