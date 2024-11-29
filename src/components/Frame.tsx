@@ -14,6 +14,50 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const isSelected = blok._uid === selectedUid;
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const frameVariants = {
+    initial: {
+      width: "100%",
+      height: "100%",
+      borderRadius: "0.5rem",
+      position: "relative",
+      zIndex: 0,
+    },
+    expanded: {
+      width: "100vw",
+      height: "100vh",
+      borderRadius: "0rem",
+      position: "fixed",
+      top: 0,
+      left: 0,
+      zIndex: 50,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut",
+        when: "afterChildren", // Wait until children have animated out
+      },
+    },
+  };
+
+  const previewVariants = {
+    visible: {
+      opacity: 1,
+    },
+    hidden: {
+      opacity: 0,
+      transition: { duration: 0.3 },
+    },
+  };
+
+  const expandedVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.3, delayChildren: 0.5 }, // Delay content appearance until frame has expanded
+    },
+  };
+
   // Extract day number from blok.name
   const frameDay = blok.dayNumber;
 
@@ -80,10 +124,10 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
           {isSelected ? (
             <motion.div
               key={`expanded-${blok._uid}-${isSelected}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.2, duration: 0.3 }}
+              variants={expandedVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
               className="w-full h-full"
             >
               <motion.button
@@ -118,11 +162,11 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
             // Render preview content
             <motion.h2
               key={`preview-${blok._uid}-${isSelected}`}
+              variants={previewVariants}
+              initial="visible"
+              animate="visible"
+              exit="hidden"
               layoutId={`title-${blok._uid}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
               className={`text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
 
             >
