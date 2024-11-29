@@ -3,6 +3,7 @@ import { useSelectedFrame } from "@/contexts/SelectedFrameContext";
 import { AboutBlok, DeployedProjectBlok, FrameProps } from "@/types/blok";
 import { storyblokEditable, StoryblokServerComponent } from "@storyblok/react/rsc";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 
 interface FrameComponentProps extends FrameProps {
@@ -41,7 +42,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   // const today = new Date();
   // const currentMonth = today.getMonth();
   // const currentDay = currentMonth == 11 ? today.getDate() : 0;
-  const currentDay = 11 == 11 ? 17 : 0;
+  const currentDay = 11 == 11 ? 24 : 0;
 
   // Determine if the frame should be accessible
   const isAccessible = frameDay <= currentDay;
@@ -83,14 +84,12 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
         borderRadius: isSelected ? "0rem" : "0.5rem",
         top: 0,
         left: 0,
-        cursor: isAccessible ? 'pointer' : 'not-allowed',
+        cursor: isAccessible ? 'pointer' : 'normal',
       }}
       transition={{
         layout: { duration: 0.5, ease: "easeInOut" },
       }}
-      className={`overflow-hidden text-black
-        ${isAccessible ? "bg-[#3688D3]" : "bg-[#E9E9E6]"}
-        transition-colors duration-500`}
+      className={`overflow-hidden text-black border-0 bg-[#E9E9E6] transition-colors duration-500`}
       onClick={isAccessible && !isSelected ? handleClick : undefined}
       onLayoutAnimationStart={handleLayoutAnimationStart}
       onLayoutAnimationComplete={handleLayoutAnimationComplete}
@@ -152,6 +151,20 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
           )}
         </AnimatePresence>
       </motion.div>
+      {/* Framer Motion for Image Fade */}
+      {isAccessible && (<motion.div
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isSelected ? 0 : 1 }}
+        transition={{ duration: 0.25, delay: isSelected ? 0 : 0.5 }}
+        className="-z-10 absolute top-0 left-0 w-full h-full inset-10"
+      >
+        <Image
+          src={blok.deployed_project[0].preview.filename}
+          fill
+          alt="preview image"
+          className="object-cover"
+        />
+      </motion.div>)}
     </motion.div >
   )
 }

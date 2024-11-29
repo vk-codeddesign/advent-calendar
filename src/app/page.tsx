@@ -15,6 +15,7 @@ export default async function Home() {
         <StoryblokStory story={data.story} bridgeOptions={bridgeOptions} />
         {/* <pre>{JSON.stringify(data.story.content, null, 2)}</pre> */}
       </div>
+
     </main>
   );
 }
