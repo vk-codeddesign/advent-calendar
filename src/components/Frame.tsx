@@ -13,7 +13,8 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const { selectedUid, setSelectedUid } = useSelectedFrame();
   const isSelected = blok._uid === selectedUid;
   const [isAnimating, setIsAnimating] = useState(false);
-  const [startLayoutAnimation, setStartLayoutAnimation] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
 
   // Extract day number from blok.name
   const frameDay = blok.dayNumber;
@@ -55,12 +56,12 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   };
 
   const previewVariants = {
-    visible: {
-      opacity: 1,
-    },
     hidden: {
       opacity: 0,
-      transition: { duration: 0.3 },
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.3, delay: 1 },
     },
   };
 
@@ -88,11 +89,11 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
 
       style={{
         gridArea: letter,
-        zIndex: isAnimating || isSelected ? 50 : 0,
-        width: isSelected ? "100vw" : "100%",
-        height: isSelected ? "100vh" : "100%",
-        position: isSelected ? "fixed" : "relative",
-        borderRadius: isSelected ? "0rem" : "0.5rem",
+        zIndex: isFadingOut || isAnimating || isSelected ? 50 : 0,
+        width: isFadingOut && isSelected ? "100vw" : "100%",
+        height: isFadingOut && isSelected ? "100vh" : "100%",
+        position: isFadingOut || isSelected ? "fixed" : "relative",
+        borderRadius: isFadingOut && isSelected ? "0rem" : "0.5rem",
         top: 0,
         left: 0,
         cursor: isAccessible ? 'pointer' : 'normal',
@@ -101,7 +102,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
         layout: { duration: 0.5, ease: "easeInOut" },
       }}
       className={`overflow-hidden text-black
-        ${isAccessible ? "bg-[#3688D3]" : "bg-[#E9E9E6]"}
+        ${isAccessible && !isSelected ? "bg-[#3688D3]" : "bg-[#E9E9E6]"}
         transition-colors duration-500`}
       onClick={isAccessible && !isSelected ? handleClick : undefined}
     >
@@ -117,9 +118,11 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
               // layoutId={`title-${blok._uid}`}
               layoutId={`content-${blok._uid}`}
               variants={previewVariants}
-              initial="visible"
+              initial="hidden"
               animate="visible"
               exit="hidden"
+              onAnimationStart={() => setIsFadingOut(true)}
+              onAnimationComplete={() => setIsFadingOut(false)}
 
               className={`text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
             >
@@ -136,6 +139,9 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
               initial="hidden"
               animate="visible"
               exit="hidden"
+              onAnimationStart={() => setIsFadingOut(true)}
+              onAnimationComplete={() => setIsFadingOut(false)}
+
               className="w-full h-full"
             >
               <button
