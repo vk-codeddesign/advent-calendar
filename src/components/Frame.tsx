@@ -42,13 +42,9 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
 
   const frameVariants = {
     initial: {
-      width: "100%",
-      height: "100%",
       borderRadius: "0.5rem",
     },
     expanded: {
-      width: "100vw",
-      height: "100vh",
       borderRadius: "0rem",
       transition: {
         duration: 0.5,
@@ -74,14 +70,16 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
     },
     visible: {
       opacity: 1,
-      transition: { duration: 0.3, delayChildren: 0.5 }, // Delay content appearance until frame has expanded
+      transition: { duration: 0.3 },
     },
   };
 
   return (
     <motion.div
       layout
-      // layoutId={`frame-${blok._uid}`}
+      onLayoutAnimationStart={() => setIsAnimating(true)}
+      onLayoutAnimationComplete={() => setIsAnimating(false)}
+
       {...storyblokEditable(blok)}
 
       variants={frameVariants}
@@ -91,12 +89,12 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
       style={{
         gridArea: letter,
         cursor: isAccessible ? 'pointer' : 'not-allowed',
-        position: isSelected ? "fixed" : "relative",
-        top: isSelected ? 0 : undefined,
-        left: isSelected ? 0 : undefined,
-        zIndex: isSelected ? 50 : 0,
-        width: isSelected ? "100vw" : "100%",
-        height: isSelected ? "100vh" : "100%",
+        position: isSelected || isAnimating ? "fixed" : "relative",
+        top: isSelected || isAnimating ? 0 : undefined,
+        left: isSelected || isAnimating ? 0 : undefined,
+        zIndex: isSelected || isAnimating ? 50 : 0,
+        width: isSelected || isAnimating ? "100vw" : "100%",
+        height: isSelected || isAnimating ? "100vh" : "100%",
         borderRadius: isSelected ? "0rem" : "0.5rem",
       }}
       transition={{
@@ -114,13 +112,15 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
           {!isSelected && (
             // Render preview content
             <motion.h2
-              key={`preview-${blok._uid}-${isSelected}`}
+              key={`preview-${blok._uid}`}
               layout
-              layoutId={`title-${blok._uid}`}
+              // layoutId={`title-${blok._uid}`}
+              layoutId={`content-${blok._uid}`}
               variants={previewVariants}
-              initial={{ opacity: 1 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial="visible"
+              animate="visible"
+              exit="hidden"
+
               className={`text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
             >
               {blok.name.slice(0, -10)}
@@ -129,13 +129,13 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
           )}
           {isSelected && (
             <motion.div
-              key={`expanded-${blok._uid}-${isSelected}`}
+              key={`expanded-${blok._uid}`}
               layout
+              // layoutId={`content-${blok._uid}`}
               layoutId={`content-${blok._uid}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
               className="w-full h-full"
             >
               <button
