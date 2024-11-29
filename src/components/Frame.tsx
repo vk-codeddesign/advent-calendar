@@ -88,14 +88,14 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
 
       style={{
         gridArea: letter,
-        cursor: isAccessible ? 'pointer' : 'not-allowed',
-        position: isSelected || isAnimating ? "fixed" : "relative",
-        top: isSelected || isAnimating ? 0 : undefined,
-        left: isSelected || isAnimating ? 0 : undefined,
-        zIndex: isSelected || isAnimating ? 50 : 0,
-        width: isSelected || isAnimating ? "100vw" : "100%",
-        height: isSelected || isAnimating ? "100vh" : "100%",
+        zIndex: isAnimating || isSelected ? 50 : 0,
+        width: isSelected ? "100vw" : "100%",
+        height: isSelected ? "100vh" : "100%",
+        position: isSelected ? "fixed" : "relative",
         borderRadius: isSelected ? "0rem" : "0.5rem",
+        top: 0,
+        left: 0,
+        cursor: isAccessible ? 'pointer' : 'normal',
       }}
       transition={{
         layout: { duration: 0.5, ease: "easeInOut" },
