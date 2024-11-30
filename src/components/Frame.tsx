@@ -159,7 +159,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
         className="-z-10 absolute top-0 left-0 w-full h-full inset-10"
       >
         <Image
-          src={blok.deployed_project[0].preview.filename}
+          src={`${blok.deployed_project[0].preview.filename}/m/`}
           fill
           alt="preview image"
           className="object-cover"
