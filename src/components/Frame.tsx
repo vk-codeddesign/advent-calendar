@@ -39,10 +39,10 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
   const frameDay = blok.dayNumber;
 
   // Get current day of december
-  const today = new Date();
-  const currentMonth = today.getMonth();
-  const currentDay = currentMonth == 11 ? today.getDate() : 0;
-  // const currentDay = 11 == 11 ? 24 : 0;
+  // const today = new Date();
+  // const currentMonth = today.getMonth();
+  // const currentDay = currentMonth == 11 ? today.getDate() : 0;
+  const currentDay = 11 == 11 ? 24 : 0;
 
   // Determine if the frame should be accessible
   const isAccessible = frameDay <= currentDay;
