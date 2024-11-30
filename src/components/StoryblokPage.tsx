@@ -18,7 +18,7 @@ export default function StoryblokPage({ blok }: PageProps) {
         ))}
       </div>
       <div className="flex flex-col w-full justify-center items-center mt-4">
-        <pre className="text-xs font-mono bg-gray-800/50 px-2 py-1 rounded-lg border border-gray-700/20">Main calendar developed by <a href="https://www.linkedin.com/in/baldrian-sector-227042269/">Baldrian Sector</a> & <a href="https://www.linkedin.com/in/hannibal-marcellus-munk-5586a5150/">Hannibal Marcellus Munk</a></pre>
+        <pre className="text-xs font-mono bg-gray-800/50 px-2 py-1 rounded-lg border border-gray-700/20">Main calendar <a href="https://www.linkedin.com/in/baldrian-sector-227042269/">Baldrian Sector</a> & <a href="https://www.linkedin.com/in/hannibal-marcellus-munk-5586a5150/">Hannibal Marcellus Munk</a></pre>
         <pre className="text-xs font-mono bg-gray-800/50 px-2 py-1 rounded-lg border border-gray-700/20">Se kredittering under hver enkel låge</pre>
       </div>
     </main >
