@@ -3,7 +3,7 @@ import { PageProps } from "@/types/blok";
 import { StoryblokServerComponent, storyblokEditable } from "@storyblok/react/rsc";
 import styles from './StoryblokPage.module.css';
 import React from 'react';
-import SnowOverlay from '../components/SnowOverlay.tsx';
+import SnowOverlay from './components/SnowOverlay.tsx';
 
 export default function StoryblokPage({ blok }: PageProps) {
   const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x'];  // All unique letters from the grid
