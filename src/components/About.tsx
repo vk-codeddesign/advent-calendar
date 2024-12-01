@@ -5,7 +5,7 @@ export default function Creator({ blok }: AboutProps) {
   return (
     <div {...storyblokEditable(blok)} className="flex flex-col w-full h-full cursor-auto">
       <div className="h-full flex flex-col justify-center items-center cursor-auto">
-        <h1 className="text-3xl md:text-4xl mt-6 mb-0 leading-relaxed cursor-auto">{blok.project_title}</h1>
+        <h1 className="text-3xl md:text-4xl mt-6 mb-0 leading-relaxed text-center cursor-auto">{blok.project_title}</h1>
         <p className="max-w-lg text-xl font-medium text-center text-balance leading-relaxed my-4 cursor-auto">{blok.project_description}</p>
       </div>
       <div className="px-4 w-full flex justify-between items-end">
