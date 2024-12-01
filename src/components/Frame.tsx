@@ -117,7 +117,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
                 layoutId={`content-${blok._uid}`}
                 className="h-full flex flex-col justify-start md:justify-center items-center"
               >
-                <div className="mt-2 mb-8 text-2xl">{blok.name.slice(0, -5) + "."}</div>
+                <div className="mt-2 mb-8 text-2xl cursor-auto">{blok.name.slice(0, -5) + "."}</div>
                 <div className="max-w-screen-xl w-full flex flex-col md:flex-row">
                   <div className="m-auto w-full flex justify-center items-center">
                     {blok.deployed_project.map((projectBlok: DeployedProjectBlok) => (
@@ -142,7 +142,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
               animate="visible"
               exit="hidden"
               layoutId={`title-${blok._uid}`}
-              className={`text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
+              className={`select-none text-fluid-6xl font-semibold ${(letter == "x" || letter == "t") && "text-fluid-9xl"} ${(letter == "a" || letter == "m" || letter == "q") && "text-fluid-8xl"}`}
 
             >
               {blok.name.slice(0, -10)}
