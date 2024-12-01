@@ -45,7 +45,7 @@ export default function DeployedProject({ blok }: DeployedProjectProps) {
           src={blok.netlify_url.url}
           // src="https://editor.p5js.org/amcc/sketches/kBndhSZER"
           className="absolute transform-gpu origin-top-left scale-30 md:scale-50 overflow-hidden"
-          style={{ width: "1024px", height: "1024px", touchAction: "manipulation" }}
+          style={{ width: "1050px", height: "1050px", touchAction: "manipulation" }}
           allow="camera; microphone; accelerometer; gyroscope; geolocation; magnetometer; fullscreen; autoplay"
         />
       </div>
