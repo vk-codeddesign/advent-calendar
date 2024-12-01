@@ -11,7 +11,7 @@ export default function StoryblokPage({ blok }: PageProps) {
   return (
     <main {...storyblokEditable(blok)} className="w-full min-h-svh px-2 md:px-4 lg:px-12 flex flex-col items-center justify-center">
       {/* <pre className="text-wrap">{JSON.stringify(blok, null, 2)}</pre> */}
-      <SnowOverlay />
+      {/* <SnowOverlay /> */}
       <div className="flex flex-col justify-center items-center py-4">
         <h1 className="font-medum text-white text-5xl text-center tracking-normal uppercase">Coded Design<br />Julekalender</h1>
         <p className="opacity-25 hover:opacity-100 transition-all duration-100"><a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.dmjx.dk/uddannelser/coded-design&ved=2ahUKEwjfzKqV1IGKAxX_R_EDHRvcMl0QFnoECBsQAQ&usg=AOvVaw0Z8WabmmTeOckyOKvQCDTe">Læs mere om uddannelsen her</a></p>
