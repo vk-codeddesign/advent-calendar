@@ -1,12 +1,12 @@
-// Variable for the number of snowflakes
-$snowflakes-count: 30;
+/* Variable for the number of snowflakes */
+$snowflakes-count: 250;
 
 .snow-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100svh; // Use stable viewport height unit
+    height: 100svh; /* Use stable viewport height */
     overflow: hidden;
     pointer-events: none;
 }
@@ -17,10 +17,14 @@ $snowflakes-count: 30;
     height: 10px;
     background: white;
     border-radius: 50%;
-    opacity: 0; // Default; animation will handle opacity
+    opacity: 0; /* Default; animation will handle opacity */
     filter: drop-shadow(0 0 10px white);
+    will-change: transform, opacity; /* Optimize for animations */
+    backface-visibility: hidden;
+    animation-fill-mode: forwards; /* Prevent animation resets */
 }
 
+/* Helper function for random range in SCSS */
 @function random_range($min, $max) {
     $rand: random();
     $random_range: $min + floor($rand * (($max - $min) + 1));
@@ -33,7 +37,7 @@ $snowflakes-count: 30;
     $random-x-end: $random-x + $random-offset;
     $random-x-end-yoyo: $random-x + ($random-offset / 2);
     $random-yoyo-time: random_range(30000, 80000) / 100000;
-    $random-yoyo-y: $random-yoyo-time * 100svh; // Use stable viewport height
+    $random-yoyo-y: $random-yoyo-time * 100svh; /* Stable viewport height */
     $random-scale: random(10000) * 0.0001;
     $fall-duration: random_range(10, 30) * 1s;
     $fall-delay: random(30) * -1s;
@@ -42,13 +46,17 @@ $snowflakes-count: 30;
         opacity: random(10000) * 0.0001;
         transform: translate($random-x, -10px) scale($random-scale);
         animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+        animation-timing-function: ease-in-out;
     }
 
     @keyframes fall-#{$i} {
+        0% {
+            transform: translate($random-x, -10px) scale($random-scale);
+        }
         #{percentage($random-yoyo-time)} {
             transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
         }
-        to {
+        100% {
             transform: translate($random-x-end-yoyo, 100svh) scale($random-scale);
         }
     }
