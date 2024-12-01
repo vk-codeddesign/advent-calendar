@@ -163,6 +163,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
           fill
           alt="preview image"
           className="object-cover"
+          sizes="350x350"
         />
       </motion.div>)}
     </motion.div >
