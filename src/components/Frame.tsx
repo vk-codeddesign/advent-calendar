@@ -90,7 +90,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
       transition={{
         layout: { duration: 0.5, ease: "easeInOut" },
       }}
-      className={`overflow-hidden text-black border-0 bg-[#E9E9E6] transition-colors duration-500`}
+      className={`overflow-hidden text-black border-0 bg-[#E9E9E6] transition-colors duration-500 ${!isSelected && !isAnimating && isAccessible && "hover:scale-105"} transition-transform duration-500`}
       onClick={isAccessible && !isSelected ? handleClick : undefined}
       onLayoutAnimationStart={handleLayoutAnimationStart}
       onLayoutAnimationComplete={handleLayoutAnimationComplete}
