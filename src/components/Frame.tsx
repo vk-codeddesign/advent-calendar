@@ -46,6 +46,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
 
   // Determine if the frame should be accessible
   const isAccessible = frameDay <= currentDay;
+  const isOld = frameDay < currentDay;
 
   const handleClick = () => {
     if (isAccessible && !isAnimating) {
@@ -78,8 +79,8 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
       style={{
         gridArea: letter,
         zIndex: isAnimating || isSelected ? 50 : 0,
-        width: isSelected ? "100vw" : "100%",
-        height: isSelected ? "100vh" : "100%",
+        width: isSelected ? "100dvw" : "100%",
+        height: isSelected ? "100dvh" : "100%",
         position: isSelected ? "fixed" : "relative",
         borderRadius: isSelected ? "0rem" : "0.5rem",
         top: 0,
@@ -152,7 +153,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
         </AnimatePresence>
       </motion.div>
       {/* Framer Motion for Image Fade */}
-      {isAccessible && (<motion.div
+      {isOld && (<motion.div
         initial={{ opacity: 1 }}
         animate={{ opacity: isSelected ? 0 : 1 }}
         transition={{ duration: 0.25, delay: isSelected ? 0 : 0.5 }}
