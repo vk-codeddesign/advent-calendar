@@ -12,7 +12,6 @@ export default function Creator({ blok }: AboutProps) {
         <h3 className="text-sm -mb-1 cursor-auto">{blok.creator_full_name}</h3>
         <span className="text-sm flex flex-col items-end gap-2">
           {blok.creator_instagram_handle && <a href={`https://www.instagram.com/${blok.creator_instagram_handle.slice(1)}`}>{blok.creator_instagram_handle}</a>}
-          {blok.creator_linkedin_handle && <a href={blok.creator_linkedin_handle.url} className="max-w-96 text-ellipsis -mr-px">LinkedIn Profile</a>}
         </span>
       </div>
     </div>
