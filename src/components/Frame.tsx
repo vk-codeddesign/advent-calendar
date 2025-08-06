@@ -63,7 +63,7 @@ export default function Frame({ blok, letter }: FrameComponentProps) {
     }
   };
 
-  const handleClose = (e: any) => {
+  const handleClose = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!isAnimating) {
       setIsAnimating(true);
